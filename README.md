@@ -22,15 +22,22 @@ OpenJDK Runtime Environment (IcedTea6 1.13.10) (rhel-1.13.10.0.el6_7-x86_64)
 OpenJDK 64-Bit Server VM (build 23.25-b01, mixed mode)
 
 ## Jenkins install ##
-$sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-$sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
-$sudo yum install jenkins
-$sudo service jenkins start
-[root@ecsc00104334 dobri_stefanov@epam.com]# rpm -qa |grep jenk
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins
+sudo service jenkins start
+# rpm -qa |grep jenk
 jenkins-1.653-1.1.noarch
 
 Test git repo - I am using my free account in github 
-[dobri_stefanov@epam.com@ecsc00104334 ~]$ git remote add origin git@github.com:astor2015/jSudoku.git
+-bash-4.1$ pwd
+/var/lib/jenkins
+-bash-4.1$  id
+uid=498(jenkins) gid=498(jenkins) groups=498(jenkins)
+git config --global user.email "dobris@gmail.com"
+git config --global user.name "astor2015"
+git remote -v
+git remote add origin git@github.com:astor2015/jSudoku.git
 
 ## 3.Jenkins GUI ##
 Jenkins GUI is availbe on the following address -> http://ecsc00104334:8080/
