@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="jSudoku Build" basedir="." default="jar">
+
+	<!--Full name of the app-->
+    <property name="app.name"      value="jSudoku"/>
+	<property name="app.shortName" value="jSudoku"/>
+	<property name="app.version"   value="1.0"/>
+
+	<property name="source.home"  value="src"/>
+	<property name="classes.home" value="bin"/>
+	<property name="lib.home"     value="lib"/>
+	
+	<!--DO NOT CHANGE THE INFORMATION BELOW!!-->
+	
+	<!--Ant messages-->
+	<property name="msg" value="Compiling..."/>
+	<property name="msg2" value="Compiled!"/>
+	<property name="msg3" value="Running..."/>
+	<property name="msg4" value="Completed!"/>
+
+	<path id="project.class.path">	    
+			    <pathelement path="${lib.home}/kduXtra.jar"/>
+	    		<pathelement path="${lib.home}/looks-1.3.2.jar"/>
+	</path>
+
+	<property name="main.class"   value="org.kdu.jsudoku.control.Controller"/>	
+	<property name="main.path"    value="org/kdu/jsudoku/control/Controller.class"/>
+	
+  	<target name="sub.compile" depends="sub.clear">
+    	<echo message="${msg}"/>
+		<javac source="1.5" srcdir="${source.home}" 
+	         destdir="${classes.home}" debug="yes">
+			<classpath refid="project.class.path"/>
+		</javac>
+  		<echo message="${msg2}"/>
+	</target>
+		
+	<target name="jar" depends="sub.compile,sub.manifest">
+		<echo message="Generating jar file..."/>		
+		<jar destfile="${app.name}.jar" basedir="${classes.home}" manifest="${classes.home}/META-INF/MANIFEST.MF">
+			<zipfileset src="${lib.home}/kduXtra.jar"/>
+			<zipfileset src="${lib.home}/looks-1.3.2.jar"/>
+		</jar>
+		<echo message="${app.name}.jar Generated!"/>
+	</target>
+	
+   <target name="sub.manifest" xmlns:xalan="http://xml.apache.org/xslt">
+   		<echo message="Generating manifest file..."/>
+   		<manifest mode="update" file="${classes.home}/META-INF/MANIFEST.MF">
+            <attribute name="Implementation-Vendor" value="Carlos Eduardo Genz"/>
+            <attribute name="Implementation-Title" value="${app.name}"/>
+            <attribute name="Implementation-Version" value="${app.version}"/>
+   			<attribute name="Main-Class" value="${main.class}"/>
+        </manifest>
+	   	<echo message="Manifest file Generated!"/>
+    </target>
+
+	<target name="sub.clear">
+		<echo message="clearing..."/>
+		<delete file="${app.name}.jar"/> 
+		<echo message="clear!"/>
+	</target>
+</project>
